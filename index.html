@@ -59,6 +59,6 @@ function escapeHtml(s){return s.replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;',
 async function save(){try{const r=await fetch(SUPABASE_URL+'/rest/v1/flappy_scores',{method:'POST',headers:{...headers,Prefer:'return=minimal'},body:JSON.stringify({nickname:nick,score})});if(!r.ok)throw Error();statusEl.textContent='Результат сохранён.';loadScores();}catch{statusEl.textContent='Результат не сохранён: выполните SQL-настройку таблицы.'}}
 function finish(){if(ended)return;playing=false;ended=true;save();overlay.innerHTML=`<div class="dialog"><h1>Полёт окончен</h1><p>${escapeHtml(nick)}, ваш счёт: <b>${score}</b></p><button id="again">Лететь снова</button></div>`;overlay.style.display='grid';document.querySelector('#again').onclick=()=>{reset();playing=true;ended=false;overlay.style.display='none';};}
 form.addEventListener('submit',e=>{e.preventDefault();nick=nameEl.value.trim();if(!nick)return;reset();playing=true;overlay.style.display='none';});
-addEventListener('keydown',e=>{if([' ','ArrowUp'].includes(e.key)){e.preventDefault();flap();}});c.addEventListener('pointerdown',flap);loadScores();tick();
+addEventListener('keydown',e=>{if([' ','ArrowUp'].includes(e.key)){e.preventDefault();flap();}});c.addEventListener('pointerdown',flap);reset();loadScores();tick();
 </script>
 </body></html>
