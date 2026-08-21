@@ -9,9 +9,11 @@ create table if not exists public.flappy_scores (
 
 alter table public.flappy_scores enable row level security;
 
+drop policy if exists "Anyone can add a flight" on public.flappy_scores;
 create policy "Anyone can add a flight" on public.flappy_scores
 for insert to anon with check (true);
 
+drop policy if exists "Anyone can view all flights" on public.flappy_scores;
 create policy "Anyone can view all flights" on public.flappy_scores
 for select to anon using (true);
 
@@ -25,8 +27,10 @@ create table if not exists public.flappy_players (
 
 alter table public.flappy_players enable row level security;
 
+drop policy if exists "Anyone can look up their device registration" on public.flappy_players;
 create policy "Anyone can look up their device registration" on public.flappy_players
 for select to anon using (true);
 
+drop policy if exists "Anyone can reserve an unused nickname" on public.flappy_players;
 create policy "Anyone can reserve an unused nickname" on public.flappy_players
 for insert to anon with check (true);
