@@ -14,3 +14,19 @@ for insert to anon with check (true);
 
 create policy "Anyone can view all flights" on public.flappy_scores
 for select to anon using (true);
+
+-- Run this section too: it reserves one nickname for one browser/device ID.
+-- Existing score history remains unchanged.
+create table if not exists public.flappy_players (
+  nickname text primary key check (char_length(btrim(nickname)) between 1 and 28),
+  device_id uuid not null unique,
+  created_at timestamptz not null default now()
+);
+
+alter table public.flappy_players enable row level security;
+
+create policy "Anyone can look up their device registration" on public.flappy_players
+for select to anon using (true);
+
+create policy "Anyone can reserve an unused nickname" on public.flappy_players
+for insert to anon with check (true);
