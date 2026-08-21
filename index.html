@@ -16,4 +16,4 @@ document.querySelector('#form').onsubmit=async e=>{e.preventDefault();nameMessag
 </script><script>
 document.head.insertAdjacentHTML('beforeend',`<style>.game-card{width:min(100%,960px)!important}.game-card canvas{aspect-ratio:16/9!important}.celestial-title{display:inline-block!important;background:linear-gradient(105deg,#ffeb36 0 30%,#42c968 32% 57%,#22a7ed 59% 83%,#ffe33b 85%);-webkit-background-clip:text;background-clip:text;color:transparent!important;-webkit-text-stroke:1.5px #143f62;text-shadow:3px 3px 0 #1492d0,6px 5px 0 #35a555,8px 7px 0 #e9b725,0 0 14px #f9ef5d;filter:drop-shadow(0 3px 0 #102838) saturate(1.7)}@media(max-width:699px){.game-card{width:100%!important}}</style>`);
 addEventListener('keydown',e=>{if(e.target===nickEl&&e.key===' ')e.stopImmediatePropagation()},true);
-</script></body></html>
+</script><style>@media (orientation:portrait) and (max-width:699px){.game.active .game-card,.game.active .hint{display:block}.game.active #rotate{display:none!important}.game.active{align-content:center}.game-card canvas{aspect-ratio:16/9!important}}</style></body></html>
